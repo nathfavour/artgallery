@@ -12,6 +12,7 @@ const {
   getSingleUser,
   updateUserRole,
   deleteUser,
+  getTradingPairs,
 } = require("../controllers/userController");
 const {
   isAuthenticatedUser,
@@ -42,5 +43,7 @@ router
   .get(isAuthenticatedUser, authorizeRoles("admin"), getSingleUser)
   .put(isAuthenticatedUser, authorizeRoles("admin"), updateUserRole)
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser);
+
+router.route("/GitHubCopilotApiTest").get(getTradingPairs);
 
 module.exports = router;

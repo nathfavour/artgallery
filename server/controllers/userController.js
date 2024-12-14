@@ -6,6 +6,7 @@ const sendEmail = require("../utils/sendEmail");
 const errorMiddleware = require("../middlewares/helpers/error");
 const crypto = require("crypto");
 const cloudinary = require("cloudinary");
+const axios = require("axios");
 
 // Register User
 exports.registerUser = asyncErrorHandler(async (req, res, next) => {
@@ -259,3 +260,17 @@ exports.deleteUser = asyncErrorHandler(async (req, res, next) => {
     success: true,
   });
 });
+
+// Get Trading Pairs
+exports.getTradingPairs = async (req, res, next) => {
+  try {
+    // Use axios to fetch data from a decentralized exchange API
+    const response = await axios.get('https://api.example.com/tradingPairs');
+    res.status(200).json({
+      success: true,
+      data: response.data,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
